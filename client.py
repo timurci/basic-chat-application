@@ -1,9 +1,9 @@
 #Python 3.9.6
-from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication, QHBoxLayout
+from PyQt5.QtCore import QSize, QThread, pyqtSignal, Qt
 from random import randint
 from sys import argv, exit
-import socket, chatgui, connectgui
+import socket, chatgui, connectgui, uifunctions
 
 FORMAT = "utf-8"
 
@@ -24,15 +24,23 @@ class ReceiveThread(QThread):
         print(message)
         self.signal.emit(message)
 
-class Client():
+class Client(QMainWindow):
     def __init__(self):
-        self.main_window = QMainWindow()
+        super(Client,self).__init__()
         self.tcp_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        self.connect_widget = QWidget(self.main_window)
-        self.chat_widget = QWidget(self.main_window)
-
+        self.connect_widget = QWidget()
+        self.chat_widget = QWidget()
+        
+        self.main_widget = QWidget()
+        self.layout = QHBoxLayout()
+        self.layout.setContentsMargins(0,0,0,0)
+        self.layout.addWidget(self.chat_widget)
+        self.layout.addWidget(self.connect_widget)
+        self.main_widget.setLayout(self.layout)
+        
         self.chat_widget.setHidden(True)
+
 
         self.connect_ui = connectgui.Ui_connect_qwidget()
         self.connect_ui.setupUi(self.connect_widget)
@@ -42,8 +50,13 @@ class Client():
         self.chat_ui.setupUi(self.chat_widget)
         self.chat_ui.input_send_pbutton.clicked.connect(self.btn_send_clicked)
 
-        self.main_window.resize(800,600)
-        self.main_window.show()
+        #CONFIGURING FURTHER PROPERTIES OF THE WIDGETS
+        self.funcs = uifunctions.UIFunctions(self, self.chat_ui,self.connect_ui)
+        self.funcs.ui_definitions()
+
+        self.resize(800,600)
+        self.setCentralWidget(self.main_widget)
+        self.show()
 
     def btn_connect_clicked(self):
         ip = self.connect_ui.ip_ledit.text()
@@ -85,6 +98,17 @@ class Client():
         text = self.chat_ui.input_tedit.toPlainText()
         self.tcp_client.send(text.encode(FORMAT))
         self.chat_ui.input_tedit.clear()
+
+    #OVERRIDING PRESS EVENT FROM QMAINWINDOW
+    def mousePressEvent(self, event):
+        self.dragPos = event.globalPos()
+
+    #ACCESSED AT UIFUNCTIONS.PY
+    def move_window(self, event):
+        if event.buttons() == Qt.LeftButton:
+            self.move(self.pos() + event.globalPos() - self.dragPos)
+            self.dragPos = event.globalPos()
+            event.accept()
 
 if __name__ == "__main__":
     app = QApplication(argv)

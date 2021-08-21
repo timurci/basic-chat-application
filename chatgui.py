@@ -333,9 +333,36 @@ class Ui_chat_qwidget(object):
 "border-bottom-left-radius: 11px;\n"
 "border-top-right-radius: 0px;\n"
 "border-top-left-radius: 0px;")
-        self.bottom_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.bottom_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.bottom_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.bottom_frame.setObjectName("bottom_frame")
+        self.bottom_hlayout = QtWidgets.QHBoxLayout(self.bottom_frame)
+        self.bottom_hlayout.setContentsMargins(0, 0, 0, 0)
+        self.bottom_hlayout.setSpacing(0)
+        self.bottom_hlayout.setObjectName("bottom_hlayout")
+        self.credit_frame = QtWidgets.QFrame(self.bottom_frame)
+        self.credit_frame.setStyleSheet("background-color: none;\n"
+"border-top-right-radius: 0px;\n"
+"border-bottom-right-radius: 0px;")
+        self.credit_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.credit_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.credit_frame.setObjectName("credit_frame")
+        self.bottom_hlayout.addWidget(self.credit_frame)
+        self.grip_frame = QtWidgets.QFrame(self.bottom_frame)
+        self.grip_frame.setMaximumSize(QtCore.QSize(30, 16777215))
+        self.grip_frame.setStyleSheet("QFrame{\n"
+"background-color: none;\n"
+"border-top-left-radius: 0px;\n"
+"border-top-right-radius: 0px;\n"
+"border-bottom-left-radius: 0px;\n"
+"}\n"
+"QFrame:hover{\n"
+"    background-color: rgba(199, 219, 232, 25);\n"
+"}")
+        self.grip_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.grip_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.grip_frame.setObjectName("grip_frame")
+        self.bottom_hlayout.addWidget(self.grip_frame)
         self.chat_qframe_layout.addWidget(self.bottom_frame)
         self.chat_qwidget_vlayout.addWidget(self.chat_qframe)
 
