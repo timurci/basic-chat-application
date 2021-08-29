@@ -30,16 +30,20 @@ class Server():
                 self.send_message(message_en, nickname)
                 print(nickname + ": " + message_en.decode(FORMAT))
 
+            except socket.error:
+                print("Client " + nickname + " has been disconnected.")
+                connection.close()
+                del(self.clients[nickname])
+                break
             except Exception as err:
                 print(err)
                 connection.close()
                 del(self.clients[nickname])
                 break
-        print("Client " + nickname + " has been disconnected.")
 
     def send_message(self, message:str, sender:str):
         if len(self.clients) > 0:
-            msg = sender + ":\n" + message.decode(FORMAT)
+            msg = "<pre style=\"font: 15px Calibri Light;\">" + "<span style=\"font-weight: bold;\">" + sender + ":</span>\n" + message.decode(FORMAT) + "</pre>"
             msg = msg.encode(FORMAT)
             for nickname in self.clients:
                 self.clients[nickname].send(msg)

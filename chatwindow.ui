@@ -54,9 +54,67 @@ border-radius: 11px;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border:none;
-border-radius: 11px;
-background-color: qlineargradient(spread:pad, x1:0.124, y1:0.0454545, x2:0.711403, y2:0.46, stop:0 rgba(104, 100, 141, 255), stop:0.870647 rgba(57, 55, 77, 255));</string>
+      <string notr="true">QFrame{
+	border:none;
+	border-radius: 11px;
+	background-color: qlineargradient(spread:pad, x1:0.124, y1:0.0454545, x2:0.711403, y2:0.46, stop:0 rgba(104, 100, 141, 255), stop:0.870647 rgba(57, 55, 77, 255));
+}
+QScrollBar:vertical{
+	border: none;
+	background-color: rgb(86, 83, 116);
+	width: 13px;
+	margin: 15px 0px 15px 0px;
+}
+QScrollBar::handle:vertical{
+	border: none;
+	background: none;
+	background-color: rgb(110, 106, 135);
+	min-heigth:30px;
+	border-radius:0px;
+}
+QScrollBar::handle:vertical:hover{
+	background-color: rgb(103, 99, 139);
+}
+QScrollBar::handle:vertical:pressed{
+	background-color: rgb(160, 189, 189);
+}
+QScrollBar::sub-line:vertical{
+	border:none;
+	background-color: rgb(128, 124, 158);
+	height: 13px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical:hover {
+	background-color: rgb(103, 99, 139);
+}
+QScrollBar::sub-line:vertical:pressed {
+	background-color: rgb(160, 189, 189);
+}
+QScrollBar::add-line:vertical{
+	border:none;
+	background-color: rgb(128, 124, 158);
+	height: 13px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical:hover {
+	background-color: rgb(103, 99, 139);
+}
+QScrollBar::add-line:vertical:pressed {
+	background-color: rgb(160, 189, 189);
+}
+QScrollBar::up-arrow:vertical,QScrollBar::down-arrow:vertical{
+	background: none;
+}
+QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical{
+	background: none;	
+	background-color: rgb(86, 83, 116);
+}</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -354,60 +412,6 @@ QPushButton:hover{
 	border: 1px solid #000;
 	border-color: rgba(0, 0, 0, 50);
 	color: rgb(163, 219, 232);
-	/*background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:2, fx:0.5, fy:0.5, stop:0.263682 rgba(93, 90, 126, 255), stop:1 rgba(58, 56, 79, 255));*/
-}
-QScrollBar:vertical{
-	border: none;
-	background-color: rgb(69, 66, 93);
-	width: 13px;
-	margin: 16px 0px 16px 0px;
-}
-QScrollBar::handle:vertical{
-	background-color: rgb(110, 106, 135);
-	min-heigth:30px;
-	border-radius:6px;
-}
-QScrollBar::handle:vertical:hover{
-	background-color: rgb(103, 99, 139);
-}
-QScrollBar::handle:vertical:pressed{
-	background-color: rgb(160, 189, 189);
-}
-QScrollBar::sub-line:vertical{
-	border:none;
-	background-color: rgb(128, 124, 158);
-	height: 13px;
-	border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
-	subcontrol-position: top;
-	subcontrol-origin: margin;
-}
-QScrollBar::sub-line:vertical:hover {
-	background-color: rgb(103, 99, 139);
-}
-QScrollBar::sub-line:vertical:pressed {
-	background-color: rgb(160, 189, 189);
-}
-QScrollBar::add-line:vertical{
-	border:none;
-	background-color: rgb(128, 124, 158);
-	height: 13px;
-	border-bottom-left-radius: 6px;
-	border-bottom-right-radius: 6px;
-	subcontrol-position: bottom;
-	subcontrol-origin: margin;
-}
-QScrollBar::add-line:vertical:hover {
-	background-color: rgb(103, 99, 139);
-}
-QScrollBar::add-line:vertical:pressed {
-	background-color: rgb(160, 189, 189);
-}
-QScrollBar::up-arrow:vertical,QScrollBar::down-arrow:vertical{
-	background-color: none;
-}
-QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical{
-	background-color: none;
 }</string>
            </property>
            <property name="frameShape">
@@ -491,60 +495,16 @@ QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical{
 	background-color: rgb(93, 90, 126);
 	background-color: rgb(86, 83, 116);
 	color: rgb(163, 219, 232);
-}
-QScrollBar:vertical{
-	border: none;
-	background-color: rgb(69, 66, 93);
-	width: 13px;
-	margin: 16px 0px 16px 0px;
-}
-QScrollBar::handle:vertical{
-	background-color: rgb(110, 106, 135);
-	min-heigth:30px;
-	border-radius:6px;
-}
-QScrollBar::handle:vertical:hover{
-	background-color: rgb(103, 99, 139);
-}
-QScrollBar::handle:vertical:pressed{
-	background-color: rgb(160, 189, 189);
-}
-QScrollBar::sub-line:vertical{
-	border:none;
-	background-color: rgb(128, 124, 158);
-	height: 13px;
-	border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
-	subcontrol-position: top;
-	subcontrol-origin: margin;
-}
-QScrollBar::sub-line:vertical:hover {
-	background-color: rgb(103, 99, 139);
-}
-QScrollBar::sub-line:vertical:pressed {
-	background-color: rgb(160, 189, 189);
-}
-QScrollBar::add-line:vertical{
-	border:none;
-	background-color: rgb(128, 124, 158);
-	height: 13px;
-	border-bottom-left-radius: 6px;
-	border-bottom-right-radius: 6px;
-	subcontrol-position: bottom;
-	subcontrol-origin: margin;
-}
-QScrollBar::add-line:vertical:hover {
-	background-color: rgb(103, 99, 139);
-}
-QScrollBar::add-line:vertical:pressed {
-	background-color: rgb(160, 189, 189);
-}
-QScrollBar::up-arrow:vertical,QScrollBar::down-arrow:vertical{
-	background-color: none;
-}
-QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical{
-	background-color: none;
 }</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAsNeeded</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
            </property>
           </widget>
          </item>

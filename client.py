@@ -100,9 +100,16 @@ class Client(QMainWindow):
             return False
 
     def btn_send_clicked(self):
-        text = self.chat_ui.input_tedit.toPlainText()
-        self.tcp_client.send(text.encode(FORMAT))
-        self.chat_ui.input_tedit.clear()
+        text = self.chat_ui.input_tedit.toPlainText().strip()
+        line_count = text.count('\n')
+        char_count = len(text)
+        if line_count > 9:
+            self.chat_ui.input_tedit.append("-----------\nYou cannot send more than 10 lines!\nYou have " + str(line_count))
+        elif char_count > 800:
+            self.chat_ui.input_tedit.append("-----------\nYou cannot send more than 800 characters!\nYou have " + str(char_count))            
+        else:
+            self.tcp_client.send(text.encode(FORMAT))
+            self.chat_ui.input_tedit.clear()
 
     # OVERRIDING EVENTFILTER
     def eventFilter(self, aobject: QObject, aevent: QEvent) -> bool:
