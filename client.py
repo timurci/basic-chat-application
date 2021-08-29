@@ -1,6 +1,6 @@
 #Python 3.9.6
 from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication, QHBoxLayout
-from PyQt5.QtCore import QSize, QThread, pyqtSignal, Qt
+from PyQt5.QtCore import QThread, pyqtSignal, Qt, QEvent, QObject
 from random import randint
 from sys import argv, exit
 import socket, chatgui, connectgui, uifunctions
@@ -50,9 +50,14 @@ class Client(QMainWindow):
         self.chat_ui.setupUi(self.chat_widget)
         self.chat_ui.input_send_pbutton.clicked.connect(self.btn_send_clicked)
 
-        #CONFIGURING FURTHER PROPERTIES OF THE WIDGETS
+        # CONFIGURING FURTHER PROPERTIES OF THE WIDGETS
         self.funcs = uifunctions.UIFunctions(self, self.chat_ui,self.connect_ui)
         self.funcs.ui_definitions()
+
+        # SETTING EVENT FILTER
+        self.connect_ui.connect_qframe.installEventFilter(self)
+        self.chat_ui.input_tedit.installEventFilter(self)
+        self.chat_ui.top_frame.installEventFilter(self)
 
         self.resize(800,600)
         self.setCentralWidget(self.main_widget)
@@ -99,11 +104,45 @@ class Client(QMainWindow):
         self.tcp_client.send(text.encode(FORMAT))
         self.chat_ui.input_tedit.clear()
 
-    #OVERRIDING PRESS EVENT FROM QMAINWINDOW
-    def mousePressEvent(self, event):
-        self.dragPos = event.globalPos()
+    # OVERRIDING EVENTFILTER
+    def eventFilter(self, aobject: QObject, aevent: QEvent) -> bool:
+        if aobject == self.chat_ui.input_tedit:
+            if aevent.type() == QEvent.KeyPress:
 
-    #ACCESSED AT UIFUNCTIONS.PY
+                if aevent.key() == Qt.Key.Key_Return:
+                    try:
+                        if self.shiftpressed == True:
+                            self.chat_ui.input_tedit.append("")
+                            return True
+                        else:
+                            self.btn_send_clicked()
+                            return True
+                    except:
+                        self.btn_send_clicked()
+                        return True
+                elif aevent.key() == Qt.Key.Key_Shift:
+                    self.shiftpressed = True
+                    return True
+            elif aevent.type() == QEvent.KeyRelease:
+                if aevent.key() == Qt.Key.Key_Shift:
+                    self.shiftpressed = False
+                    return True
+
+        # DECLARING DRAGPOS FOR SELF.MOVE_WINDOW FUNCTION
+        elif aobject == self.chat_ui.top_frame and aevent.type() == QEvent.MouseButtonPress and aevent.button() == Qt.LeftButton:
+            self.dragPos = aevent.globalPos()
+            return True
+            
+        elif aobject == self.connect_ui.connect_qframe and aevent.type() == QEvent.MouseButtonPress and aevent.button() == Qt.LeftButton:
+            self.dragPos = aevent.globalPos()
+            return True
+
+        # USING DEFAULTS FOR OTHER EVENTS
+        else:
+            super().eventFilter(aobject,aevent)
+        return False
+
+    # ACCESSED AT UIFUNCTIONS.PY
     def move_window(self, event):
         if event.buttons() == Qt.LeftButton:
             self.move(self.pos() + event.globalPos() - self.dragPos)
