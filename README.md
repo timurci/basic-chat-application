@@ -1,5 +1,4 @@
-# basic-chat-application
-# by timurci
+# basic-chat-application by timurci
 
 DESCRIPTION
 ======================
