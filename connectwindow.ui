@@ -130,6 +130,12 @@ background-color: qlineargradient(spread:pad, x1:0.124, y1:0.0454545, x2:0.71140
           <height>400</height>
          </size>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>500</width>
+          <height>400</height>
+         </size>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgba(215, 236, 255, 80);
 border: none;</string>
@@ -185,7 +191,7 @@ border: none;</string>
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>95</height>
+                <height>80</height>
                </size>
               </property>
               <property name="font">
@@ -263,7 +269,7 @@ background-color: rgba(255, 255, 255, 100);</string>
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>95</height>
+                <height>80</height>
                </size>
               </property>
               <property name="font">
@@ -341,7 +347,7 @@ background-color: rgba(255, 255, 255, 100);</string>
               <property name="minimumSize">
                <size>
                 <width>100</width>
-                <height>95</height>
+                <height>80</height>
                </size>
               </property>
               <property name="font">
@@ -395,13 +401,13 @@ background-color: rgba(255, 255, 255, 100);</string>
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>60</height>
+             <height>90</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>60</height>
+             <height>90</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -414,9 +420,6 @@ background-color: rgba(255, 255, 255, 100);</string>
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QVBoxLayout" name="button_layout">
-            <property name="spacing">
-             <number>0</number>
-            </property>
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -427,8 +430,34 @@ background-color: rgba(255, 255, 255, 100);</string>
              <number>0</number>
             </property>
             <property name="bottomMargin">
-             <number>20</number>
+             <number>25</number>
             </property>
+            <item>
+             <widget class="QLabel" name="button_warning_label">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Calibri Light</family>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(181, 85, 147);
+color: rgb(84, 26, 51);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
             <item alignment="Qt::AlignHCenter">
              <widget class="QPushButton" name="button_connect">
               <property name="minimumSize">

@@ -76,8 +76,14 @@ class Client(QMainWindow):
             port = int(port)
         if len(nickname) == 0:
             nickname = "user_" + str(randint(1,1000))
+            self.nickaccepted = True
+        elif len(nickname) > 12:
+            self.connect_ui.nick_ledit.setText("Nickname cannot be longer than 12 characters.")
+            self.nickaccepted = False
+        else:
+            self.nickaccepted = True
 
-        if self.connect(ip, port, nickname):
+        if self.nickaccepted and self.connect(ip, port, nickname):
             self.connect_widget.setHidden(True)
             self.chat_widget.setVisible(True)
 
@@ -95,7 +101,8 @@ class Client(QMainWindow):
 
             print("The client has successfuly connected to the server.")
             return True
-        except Exception as err:
+        except socket.error as err:
+            self.connect_ui.button_warning_label.setText(str(err))
             print(err)
             return False
 
