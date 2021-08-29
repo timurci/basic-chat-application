@@ -1,7 +1,6 @@
 # basic-chat-application
 # by timurci
 
-======================
 DESCRIPTION
 ======================
 
@@ -11,7 +10,6 @@ The application has been developed using:
     - Python 3.9.6
     - PyQT5 5.15.2
 
-======================
 USING APPLICATION
 ======================
 Host should run, "server.py":
@@ -29,4 +27,5 @@ Host should run, "server.py":
 User should run, "client.py":
 
     The user should connect with ipv4 address of the host.
-    Connection defaults are displayed on empty input of the connection interface, the default settings will be used in case the information would not be provided.
+    Connection defaults are displayed on empty input of the connection interface, 
+    the default settings will be used in case the information would not be provided.
