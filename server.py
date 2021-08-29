@@ -43,7 +43,8 @@ class Server():
 
     def send_message(self, message:str, sender:str):
         if len(self.clients) > 0:
-            msg = "<pre style=\"font: 15px Calibri Light;\">" + "<span style=\"font-weight: bold;\">" + sender + ":</span>\n" + message.decode(FORMAT) + "</pre>"
+            message = message.decode(FORMAT).replace("\n","<br>")
+            msg = "<p style=\"font: 15px Calibri Light;\">" + "<span style=\"font-weight: bold;\">" + sender + ":</span><br>" + message + "</p>"
             msg = msg.encode(FORMAT)
             for nickname in self.clients:
                 self.clients[nickname].send(msg)
