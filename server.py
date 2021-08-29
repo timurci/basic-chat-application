@@ -27,16 +27,17 @@ class Server():
         while True:
             try:
                 message_en = connection.recv(1024)
+                if len(message_en) == 0:
+                    print("Client " + nickname + " has been disconnected.")
+                    connection.close()
+                    del(self.clients[nickname])
+                    break
                 self.send_message(message_en, nickname)
                 print(nickname + ": " + message_en.decode(FORMAT))
 
-            except socket.error:
+            except socket.error as err:
+                print(str(err))
                 print("Client " + nickname + " has been disconnected.")
-                connection.close()
-                del(self.clients[nickname])
-                break
-            except Exception as err:
-                print(err)
                 connection.close()
                 del(self.clients[nickname])
                 break
